@@ -1,0 +1,83 @@
+{
+  "name": "template",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@craco/craco": "^6.1.0",
+    "@meilisearch/instant-meilisearch": "^0.3.0",
+    "@popperjs/core": "^2.9.1",
+    "@reduxjs/toolkit": "^1.5.0",
+    "@supabase/supabase-js": "^1.4.1",
+    "@tailwindcss/forms": "^0.3.2",
+    "@tailwindcss/postcss7-compat": "^2.0.2",
+    "@testing-library/jest-dom": "^5.11.4",
+    "@testing-library/react": "^11.1.0",
+    "@testing-library/user-event": "^12.1.10",
+    "airtable": "^0.10.1",
+    "autoprefixer": "^9",
+    "axios": "^0.21.1",
+    "firebase": "^8.2.10",
+    "fuse.js": "^6.4.6",
+    "lodash.uniq": "^4.5.0",
+    "meilisearch": "^0.18.1",
+    "moment": "^2.29.1",
+    "polished": "^4.1.1",
+    "postcss": "^7",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-feather": "^2.0.9",
+    "react-firebaseui": "^4.1.0",
+    "react-hook-form": "^7.3.0",
+    "react-instantsearch-dom": "^6.9.0",
+    "react-joyride": "^2.3.0",
+    "react-loading-skeleton": "^2.2.0",
+    "react-mailchimp-form": "^1.0.2",
+    "react-markdown": "^5.0.3",
+    "react-redux": "^7.2.3",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "4.0.1",
+    "react-select": "^4.3.0",
+    "react-share": "^4.3.1",
+    "redux-logger": "^3.0.6",
+    "styled-components": "^5.2.3",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.1.2",
+    "web-vitals": "^0.2.4"
+  },
+  "scripts": {
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test",
+    "eject": "craco eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "husky": "=4",
+    "lint-staged": ">=10",
+    "prettier": "2.2.1"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,css,md}": "prettier --write"
+  }
+}
