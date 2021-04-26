@@ -51,3 +51,4 @@ const sample data = {
 - https://covid19jagratha.kerala.nic.in/home/addHospitalDashBoard -> Kerala Beds
 - https://statedashboard.odisha.gov.in/Pages/district -> Odisha Beds
 - https://cg.nic.in/health/covid19/RTPBedAvailable.aspx -> Chhattisgarh Beds
+- https://live.angelnextdoor.in/resources.php -> Verified Lead for medicines
