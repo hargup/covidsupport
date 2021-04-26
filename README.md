@@ -8,6 +8,14 @@ At [covidsupport.neera.ai](covidsupport.neera.ai) we provide a single place to s
 
 The data collection part is available here. You can use the full app at [covidsupport.neera.ai](covidsupport.neera.ai)
 
+# How to run the project locally
+## Frontend
+```cd web && npm install```
+```npm start```
+## Backend
+```cd web && npm install```
+```node server.js```
+
 # The standard data format
 
 ```
