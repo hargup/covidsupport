@@ -10,30 +10,34 @@ The data collection part is available here. You can use the full app at [covidsu
 
 # How to run the project locally
 ## Frontend
-```cd web && npm install```
-```npm start```
+```bash
+cd web && npm install
+npm start
+```
 ## Backend
-```cd web && npm install```
-```node server.js```
+```bash
+cd server && npm install
+node server.js
+```
 
 # The standard data format
 
-```
-const sample data = {
-        "hospital": "Prakash Hospital, Sangli", 
-        "city": "Pune",
-        "verifiedAt": "2021-04-24T07:09:54.704Z", // ISO format use https://momentjs.com/docs/#/displaying/as-iso-string/ to conver to this
-        "contactNumber": "8668606730, 8983346714",
-        "bedCount": "400", // This is count of vacant beds
-        "oxygenBeds": "30", // This is count of vacant beds with oxygen
-        "icuCount": "30", // This is count of vacant icu beds
-        "ventilatorCount": "10", // // This is count of vacant icu beds with  ventilator
-        "email": "",
-        "contactPerson": "CMO",
-        "state": "Maharashtra",
-        "resources": ["beds", "oxygen", "icu"], // An array, values should be one of "beds", "oxygen", "ventilator", "icu", "plasma", "fabiflu", "tocilizumab" or "remdesivir"
-        "source": "https://umeed.live"
-    }
+```javascript
+const sample_data = {
+  hospital: "Prakash Hospital, Sangli",
+  city: "Pune",
+  verifiedAt: "2021-04-24T07:09:54.704Z", // ISO format use https://momentjs.com/docs/#/displaying/as-iso-string/ to conver to this
+  contactNumber: "8668606730, 8983346714",
+  bedCount: "400", // This is count of vacant beds
+  oxygenBeds: "30", // This is count of vacant beds with oxygen
+  icuCount: "30", // This is count of vacant icu beds
+  ventilatorCount: "10", // // This is count of vacant icu beds with  ventilator
+  email: "",
+  contactPerson: "CMO",
+  state: "Maharashtra",
+  resources: ["beds", "oxygen", "icu"], // An array, values should be one of "beds", "oxygen", "ventilator", "icu", "plasma", "fabiflu", "tocilizumab" or "remdesivir"
+  source: "https://umeed.live",
+};
 ```
 
 # How to add a new data source?
