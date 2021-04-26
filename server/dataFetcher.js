@@ -7,27 +7,7 @@ const { delhiFacilitiesData } = require("./delhiFacilitiesData");
 // moment.tz.setDefault("Asia/Kolkata");
 // TODO: Ensure that the city names are given correctly in the data
 
-function bedsToOtherResources(bedsData) {
-    if(bedsData.resources.includes("beds")) {
-        const hasOxygen = bedsData.oxygenBeds && bedsData.oxygenBeds !== "0" && bedsData.oxygenBeds !== 0;
-        const hasVentilators = bedsData.ventilatorCount && bedsData.ventilatorCount !== "0" && bedsData.ventilatorCount !== 0;
-        const hasIcu = bedsData.ventilatorCount && bedsData.icuCount !== "0" && bedsData.icuCount !== 0;
-        var resources = ["beds"]
-        if (hasOxygen) {
-            resources.push("oxygen")
-        }
-        if (hasVentilators) {
-            resources.push("ventilator")
-        }
-        if (hasIcu) {
-            resources.push("icu")
-        }
-        return {...bedsData, resources}
-    } else {
-        return bedsData
-    }
 
-}
 
 const hospitalSampleData = {
     "hospital": "Prakash Hospital, Sangli",
@@ -193,6 +173,42 @@ async function delhiHospitalData() {
     }
 }
 
+// ============== Post Processors ===========================
+
+function bedsToOtherResources(bedsData) {
+    if(bedsData.resources.includes("beds")) {
+        const hasOxygen = bedsData.oxygenBeds && bedsData.oxygenBeds !== "0" && bedsData.oxygenBeds !== 0;
+        const hasVentilators = bedsData.ventilatorCount && bedsData.ventilatorCount !== "0" && bedsData.ventilatorCount !== 0;
+        const hasIcu = bedsData.ventilatorCount && bedsData.icuCount !== "0" && bedsData.icuCount !== 0;
+        var resources = ["beds"]
+        if (hasOxygen) {
+            resources.push("oxygen")
+        }
+        if (hasVentilators) {
+            resources.push("ventilator")
+        }
+        if (hasIcu) {
+            resources.push("icu")
+        }
+        return {...bedsData, resources}
+    } else {
+        return bedsData
+    }
+
+}
+
+const delhiAlternatives = ["dehi", "delhi", "delhi ncr", "delhi ","delhi manesar", "old delhi", " delhi ncr ", "chattarpur delhi", "chattarpur", "120 km from delhi, behror"]
+
+function normalizeCityNames(city){
+    if(delhiAlternatives.includes(city.toLowerCase())){
+        return "delhi"
+    } else {
+        return city.toLowerCase()
+    }
+}
+
+// ============== Data collator =============================
+
 const dataFetchers = [
                 {source: "http://umeed.live", fetcherFn: umeedLifeDataFetcher},
                 {source: "https://covidnashik.com/", fetcherFn: nashikCovidHospitals},
@@ -211,6 +227,7 @@ async function getAllData() {
         const newData = await fetcherFn()
         data = data.concat(newData.map(item => {return {...item, source}}))
         data = data.map(item => bedsToOtherResources(item))
+        data = data.map(item => {return {...item, city: normalizeCityNames(item.city)}})
     }
     return data;
 }
