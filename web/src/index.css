@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+.mailchimp button {
+  @apply bg-gray-300 rounded-full text-lg px-2 my-2;
+}
+
+.mailchimp input {
+  @apply border border-gray-500 rounded-sm px-2 mx-2;
+}
+
+.webresult :visited {
+  @apply text-purple-900;
+}
