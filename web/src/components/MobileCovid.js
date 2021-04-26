@@ -341,9 +341,7 @@ function Loading() {
   return (
     <div>
       <Wrapper>
-        <div style={{ width: "100%", padding: "5px 5%" }}>
-          <Heading src="SupportIndia/Loading_top.svg" />
-        </div>
+        <Heading src="SupportIndia/logo2.svg" />
         <div className="text-2xl font-bold p-5">
           Loading...
           <Skeleton count={1} color="#8D81EF" highlightColor="#444" />
