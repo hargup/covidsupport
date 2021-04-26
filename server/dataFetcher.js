@@ -225,9 +225,8 @@ async function getAllData() {
     for(var i=0; i < dataFetchers.length; i++) {
         const {source, fetcherFn} = dataFetchers[i];
         const newData = await fetcherFn()
-        data = data.concat(newData.map(item => {return {...item, source}}))
+        data = data.concat(newData.map(item => {return {...item, source, city: normalizeCityNames(item.city)}}))
         data = data.map(item => bedsToOtherResources(item))
-        data = data.map(item => {return {...item, city: normalizeCityNames(item.city)}})
     }
     return data;
 }
