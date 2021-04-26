@@ -416,6 +416,10 @@ export default function MobileCovid() {
     setDisplayData(newDisplayData);
   }, [data, selectedCities, selectedResources]);
 
+  const dataSortedByVerified = displayData
+    .slice()
+    .sort((a, b) => (b.verifiedAt || "").localeCompare(a.verifiedAt || ""));
+
   return (
     <div>
       {data.length === 0 ? (
@@ -474,9 +478,9 @@ export default function MobileCovid() {
               </Search>
             </Toolbar>
           )}
-          {displayData &&
+          {dataSortedByVerified &&
             screen !== "input" &&
-            displayData.map((res) => (
+            dataSortedByVerified.map((res) => (
               <Result>
                 <div className="header">
                   <p>
