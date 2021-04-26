@@ -52,3 +52,4 @@ const sample data = {
 - https://statedashboard.odisha.gov.in/Pages/district -> Odisha Beds
 - https://cg.nic.in/health/covid19/RTPBedAvailable.aspx -> Chhattisgarh Beds
 - https://live.angelnextdoor.in/resources.php -> Verified Lead for medicines
+- https://covidresources.in/ -> Various verified covid resources
