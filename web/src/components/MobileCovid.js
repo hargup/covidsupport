@@ -193,6 +193,7 @@ function SelectBoxes(props) {
 const Toolbar = styled.div`
   display: flex;
   align-items: center;
+  justify-content: center;
   width: 100%;
   margin: 1rem 0 2rem;
 `;
@@ -213,17 +214,16 @@ const ToggleMenu = styled.div`
 const Search = styled.button`
   border: none;
   outline: none;
-  padding: 0.5rem 0.5rem;
+  padding: 0.5rem;
   background-color: ${theme.primary};
   display: flex;
   align-items: center;
+  justify-content: space-around;
+  flex-basis: 300px;
   color: white;
   border-radius: 6px;
 
   svg.search {
-    margin: 0 0.5rem 0 0;
-    /* width: 2.5rem; */
-    /* height: 2.5rem; */
     stroke: ${theme.background};
   }
 `;
@@ -414,6 +414,10 @@ export default function MobileCovid() {
     setDisplayData(newDisplayData);
   }, [data, selectedCities, selectedResources]);
 
+  const dataSortedByVerified = displayData
+    .slice()
+    .sort((a, b) => (b.verifiedAt || "").localeCompare(a.verifiedAt || ""));
+
   return (
     <div>
       {data.length === 0 ? (
@@ -467,14 +471,15 @@ export default function MobileCovid() {
                   }
                 }}
               >
-                <Icon.Search className="search" /> Find Resources (
-                {displayData.length})
+                <div style={{ width: "24px" }} />
+                <div>See Resources ({displayData.length})</div>
+                <Icon.ChevronsRight className="search" />
               </Search>
             </Toolbar>
           )}
-          {displayData &&
+          {dataSortedByVerified &&
             screen !== "input" &&
-            displayData.map((res) => (
+            dataSortedByVerified.map((res) => (
               <Result>
                 <div className="header">
                   <p>
