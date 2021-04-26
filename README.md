@@ -14,10 +14,10 @@ const sample data = {
         "city": "Pune",
         "verifiedAt": "2021-04-24T07:09:54.704Z", // ISO format use https://momentjs.com/docs/#/displaying/as-iso-string/ to conver to this
         "contactNumber": "8668606730, 8983346714",
-        "bedCount": "400",
-        "oxygenBeds": "30",
-        "icuCount": "30"
-        "ventilatorCount": "10"
+        "bedCount": "400", // This is count of vacant beds
+        "oxygenBeds": "30", // This is count of vacant beds with oxygen
+        "icuCount": "30", // This is count of vacant icu beds
+        "ventilatorCount": "10", // // This is count of vacant icu beds with  ventilator
         "email": "",
         "contactPerson": "CMO",
         "state": "Maharashtra",
@@ -43,3 +43,9 @@ const sample data = {
 - http://umeed.live -> Multiple resources for mulitple cities
 
 # Requested Sources
+- https://www.pratirakshak.co.in/new-report.php -> Ranchi Beds
+- https://bbmpgov.com/chbms/ -> Bangalore Beds
+- https://covidinfo.rajasthan.gov.in/covid-isolation-hospital.aspx -> Rajasthan Beds
+- https://covid19jagratha.kerala.nic.in/home/addHospitalDashBoard -> Kerala Beds
+- https://statedashboard.odisha.gov.in/Pages/district -> Odisha Beds
+- https://cg.nic.in/health/covid19/RTPBedAvailable.aspx -> Chhattisgarh Beds
