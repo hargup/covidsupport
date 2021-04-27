@@ -3,7 +3,21 @@ const { forEach } = require('lodash')
 var moment = require('moment')
 const _ = require('lodash-contrib'); 
 const { delhiFacilitiesData } = require("./delhiFacilitiesData");
-
+const {delhiCovidHospitals,
+    AndhraCovidHospitals,
+    tnaduCovidHospitals,
+    beedCovidHospitals,
+    amdCovidHospitals,
+    gandhinagarCovidHospitals,
+    puneCovidHospitals,
+    nashikCovidHospitals,
+    barodaCovidHospitals,
+    bengaluruCovidHospitals,
+    chattisgarhCovidHospitals,
+    madhyaPradeshCovidHospitals,
+    nagpurCovidHospitals,
+    bengalCovidHospitals,
+    telanganaCovidHospitals} =  require("./genericSourceFetcher");
 // moment.tz.setDefault("Asia/Kolkata");
 // TODO: Ensure that the city names are given correctly in the data
 
@@ -20,74 +34,6 @@ const hospitalSampleData = {
     "state": "Maharashtra",
     "resources": ["beds"],
     "source": "https://umeed.live"
-}
-
-function generalPostProcessor(item) {
-    const sample = {
-        "hospital_category": "DCHC",
-        "total_beds_allocated_to_covid": 16,
-        "total_beds_without_oxygen": 16,
-        "available_beds_without_oxygen": 16,
-        "total_beds_with_oxygen": 0,
-        "available_beds_with_oxygen": 0,
-        "total_icu_beds_without_ventilator": 0,
-        "available_icu_beds_without_ventilator": 0,
-        "total_icu_beds_with_ventilator": 0,
-        "available_icu_beds_with_ventilator": 0,
-        "hospital_name": "24 * 7  Covid Care Center",
-        "area": "East",
-        "hospital_address": "24* 7 Covid care Center  behind Canta Care Center  bhabha Nagar Nashik",
-        "hospital_phone": "8975042579",
-        "officer_name": "",
-        "officer_designation": "",
-        "last_updated_on": 1619274352597
-    }
-    // TODO: Add a total number of beds in key bedCount
-    const renameMap = {"hospital_name": "hospital",
-                       "available_beds_without_oxygen": "bedCount",
-                       "available_beds_with_oxygen": "oxygenBeds",
-                       "available_icu_beds_without_ventilator": "icuCount",
-                       "available_icu_beds_with_ventilator": "ventilatorCount",
-                       "hospital_address": "address",
-                       "hospital_phone": "contactNumber",
-                       "last_updated_on": "verifiedAt",
-                       "district": "city"}
-    const newItem =  _.renameKeys(item, renameMap)
-    const tz = moment.unix(newItem.verifiedAt/1000).toISOString()
-    return {...newItem, verifiedAt: tz}
-    
-}
-
-async function nashikCovidHospitals() {
-    const {data} = await axios.get("https://covidnashik.com/data/covidnashik.com/bed_data.json")
-    return data.map(generalPostProcessor).map(item=>{return {...item, city: "nashik", resources: ["beds"]}})
-}
-
-async function puneCovidHospitals() {
-    const {data} = await axios.get("https://covidpune.com/data/covidpune.com/bed_data.json")
-    return data.map(generalPostProcessor).map(item=>{return {...item, city: "pune", resources: ["beds"]}})
-}
-
-async function gandhinagarCovidHospitals() {
-    const {data} = await axios.get("https://covidgandhinagar.com/data/covidgandhinagar.com/bed_data.json")
-    return data.map(generalPostProcessor).map(item=>{return {...item, city: "gandhinagar", resources: ["beds"]}})
-}
-
-async function amdCovidHospitals() {
-    const {data} = await axios.get("https://covidamd.com/data/covidamd.com/bed_data.json")
-    return data.map(generalPostProcessor).map(item=>{return {...item, city: "ahmedabad", resources: ["beds"]}})
-}
-
-async function beedCovidHospitals() {
-    const {data} = await axios.get("https://covidbeed.com/data/covidbeed.com/bed_data.json")
-    return data.map(generalPostProcessor).map(item=>{return {...item, city: "beed", resources: ["beds"]}})
-}
-
-async function tnaduCovidHospitals() {
-    // NOTE: This is different from other covid<region>.com website, this is for multiple cities
-    // inside Tamil Nadu
-    const {data} = await axios.get("https://covidtnadu.com/data/covidtnadu.com/bed_data.json")
-    return data.map(generalPostProcessor).map(item=>{return {...item, resources: ["beds"]}})
 }
 
 async function umeedLifeDataFetcher() {
@@ -216,7 +162,15 @@ const dataFetchers = [
                 {source: "https://covidamd.com/", fetcherFn: amdCovidHospitals},
                 {source: "https://covidbeed.com/", fetcherFn: beedCovidHospitals},
                 {source: "https://coronabeds.jantasamvad.org", fetcherFn: delhiHospitalData},
-                {source: "https://covidtnadu.com", fetcherFn: tnaduCovidHospitals}
+                {source: "https://covidtnadu.com", fetcherFn: tnaduCovidHospitals},
+                {source: "https://coviddelhi.com", fetcherFn: delhiCovidHospitals},
+                {source: "https://covidaps.com", fetcherFn: AndhraCovidHospitals},
+                {source: "https://covidbaroda.com", fetcherFn: barodaCovidHospitals},
+                {source: "https://covidbengaluru.com", fetcherFn: bengaluruCovidHospitals},
+                {source: "https://covidcgh.com", fetcherFn: chattisgarhCovidHospitals},
+                {source: "https://covidmp.com", fetcherFn: madhyaPradeshCovidHospitals},
+                {source: "https://covidwb.com", fetcherFn: bengalCovidHospitals},
+                {source: "https://covidtelangana.com", fetcherFn: telanganaCovidHospitals}
             ]
 
 async function getAllData() {
