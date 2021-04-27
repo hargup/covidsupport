@@ -8,7 +8,6 @@ const { delhiFacilitiesData } = require("./delhiFacilitiesData");
 // TODO: Ensure that the city names are given correctly in the data
 
 
-
 const hospitalSampleData = {
     "hospital": "Prakash Hospital, Sangli",
     "city": "Pune",
@@ -112,7 +111,7 @@ async function umeedLifeDataFetcher() {
 function delhiTsToISO(delhiTs){
     // NOTE: THe year is hardcoded here
     try{
-        return moment(`${delhiTs} ${moment().year()}`).toISOString()
+        return moment(`${delhiTs} ${moment().year()}`).utcOffset("+05:30").toISOString()
 
     } catch {
         return null;
@@ -197,7 +196,7 @@ function bedsToOtherResources(bedsData) {
 
 }
 
-const delhiAlternatives = ["dehi", "delhi", "delhi ncr", "delhi ","delhi manesar", "old delhi", " delhi ncr ", "chattarpur delhi", "chattarpur", "120 km from delhi, behror"]
+const delhiAlternatives = ["dehi", "new delhi", "delhi", "delhi ncr", "delhi ","delhi manesar", "old delhi", " delhi ncr ", "chattarpur delhi", "chattarpur", "120 km from delhi, behror"]
 
 function normalizeCityNames(city){
     if(delhiAlternatives.includes(city.toLowerCase())){
