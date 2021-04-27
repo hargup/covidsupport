@@ -11,20 +11,14 @@ import Skeleton from "react-loading-skeleton";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 
+import { theme } from "../assets/theme";
+import { media } from "../assets/media";
+
 function capitalize(s) {
   if (s) {
     return s[0].toUpperCase() + s.slice(1);
   }
 }
-
-const theme = {
-  background: "#f3f4f9",
-  text: "#666",
-  gray: "#D9DADA",
-  primary: "#8D81EF",
-  greenText: "#3CAA6B",
-  greenBack: "rgba(111, 207, 151, 0.2)",
-};
 
 const boxData = [
   {
@@ -74,8 +68,27 @@ const boxData = [
   // Other resources needs to be different page
 ];
 
-const mediaDesktop = "@media (min-width: 800px)";
-const mediaMobile = "@media (max-width: 799px)";
+/* 
+  Moved theme to /assets/media
+  to make this available in all files
+  
+  theme: {
+        // theme colors
+        background: "#f3f4f9",
+        text: "#666",
+        gray: "#D9DADA",
+        primary: "#8D81EF",
+        greenText: "#3CAA6B",
+        greenBack: "rgba(111, 207, 151, 0.2)",
+      }
+
+  ~~~~~~~~~~~~~~~~~~~~~~
+
+  Moved media to /assets/media
+  to make this available in all files
+  const mediaDesktop = "@media (min-width: 800px)";
+  const mediaMobile = "@media (max-width: 799px)"; 
+*/
 
 const Heading = styled.img`
   margin: 0;
@@ -86,7 +99,7 @@ const Wrapper = styled.div`
   background: ${theme.background};
   color: ${theme.text};
 
-  ${mediaDesktop} {
+  ${media.desktop} {
     max-width: 800px;
     margin: 1rem auto;
   }
@@ -132,12 +145,12 @@ const Box = styled.div`
     box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
   }
   border-radius: 12px;
-  ${mediaMobile} {
+  ${media.mobile} {
     &:nth-child(3n + 2) {
       margin: 0 1rem 1rem;
     }
   }
-  ${mediaDesktop} {
+  ${media.desktop} {
     width: calc((800px - 5rem) / 4);
     &:nth-child(4n + 2) {
       margin: 0 1rem 1rem;
@@ -196,6 +209,10 @@ const Toolbar = styled.div`
   justify-content: center;
   width: 100%;
   margin: 1rem 0 2rem;
+
+  #react-select-3-input {
+    height: 36px;
+  }
 `;
 
 const ToggleMenu = styled.div`
@@ -270,6 +287,7 @@ const Result = styled.div`
   }
 `;
 
+const OtherResourcesLink = styled.div``;
 // =============== Common Functions ==================
 
 // Usage: sortByResource(data, 'bedCount')
@@ -555,6 +573,23 @@ export default function MobileCovid() {
                 </div>
               </Result>
             ))}
+
+          <OtherResourcesLink>
+            <p className="text-2xl max-w-xl mt-4 mb-2 ml-2">
+              Please try{" "}
+              <a
+                className="font-bold text-blue-500 underline"
+                href="/other-resources"
+              >
+                Other Resources
+              </a>{" "}
+              if the above search results in no helpful data.
+            </p>
+            <p className="text-sm max-w-xl ml-2">
+              Other resources is a list of multiple covid resources that have
+              been put together by people all over the country.
+            </p>
+          </OtherResourcesLink>
         </Wrapper>
       )}
     </div>
