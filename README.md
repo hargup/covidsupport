@@ -65,3 +65,5 @@ const sample_data = {
 - https://cg.nic.in/health/covid19/RTPBedAvailable.aspx -> Chhattisgarh Beds
 - https://live.angelnextdoor.in/resources.php -> Verified Lead for medicines
 - https://covidresources.in/ -> Various verified covid resources
+- https://docs.google.com/spreadsheets/d/1roxOi2_Uw4YBzLd5s8vC8cp6lbuM9016tWeWTcx2q5Y/edit#gid=758140453 -> Lucknow beds info
+- https://covidbedsindia.in/ -> Map of covid beds
