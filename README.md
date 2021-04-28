@@ -58,11 +58,10 @@ const sample_data = {
 - https://covidbaroda.com -> Vadodara/Baroda covid beds
 - https://covidbengaluru.com -> Bengaluru covid beds
 - https://covidcgh.com -> Chattisgarh covid beds
-- https://coviddelhi.com -> Delhi covid beds
-- https://covidmp.com/ -> Madhya Pradesh covid beds
+- https://covidmp.com -> Madhya Pradesh covid beds
 - https://covidwb.com -> West Bengal covid beds
 - https://covidtelangana.com -> Telangana covid beds
-- https://covidaps.com/ -> Andhra covid beds
+- https://covidaps.com -> Andhra covid beds
 
 # Requested Sources
 - https://www.pratirakshak.co.in/new-report.php -> Ranchi Beds
