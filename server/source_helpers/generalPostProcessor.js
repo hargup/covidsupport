@@ -14,7 +14,7 @@ async function genericCovidHospitals(bedsUrl,plasmaUrl,city,state) {
         console.log(plasmaData);
         bedsData =  bedsData && bedsData.map(generalPostProcessor).map(item=>{return {...item, city, state, resources: ["beds"]}});
         plasmaData =  plasmaData && plasmaData.map(generalPostProcessor).map(item=>{return {...item, city, state, resources: ["plasma"]}});
-
+        plasmaData = plasmaData && plasmaData.filter(item=> item.status == "available");
         return [].concat(plasmaData, bedsData)
         })
     )
