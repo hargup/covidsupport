@@ -146,6 +146,8 @@ function bedsToOtherResources(bedsData) {
 const delhiAlternatives = ["dehi", "new delhi", "delhi", "delhi ncr", "delhi ","delhi manesar", "old delhi", " delhi ncr ", "chattarpur delhi", "chattarpur", "120 km from delhi, behror"]
 
 function normalizeCityNames(city){
+    if(!city)
+        return "";
     if(delhiAlternatives.includes(city.toLowerCase())){
         return "delhi"
     } else {
@@ -164,7 +166,7 @@ const dataFetchers = [
                 {source: "https://covidbeed.com/", fetcherFn: beedCovidHospitals},
                 {source: "https://coronabeds.jantasamvad.org", fetcherFn: delhiHospitalData},
                 {source: "https://covidtnadu.com", fetcherFn: tnaduCovidHospitals},
-                // enable after duplication fixes // {source: "https://coviddelhi.com", fetcherFn: delhiCovidHospitals},
+                //enable after duplication fixes // {source: "https://coviddelhi.com", fetcherFn: delhiCovidHospitals},
                 {source: "https://covidaps.com", fetcherFn: AndhraCovidHospitals},
                 {source: "https://covidbaroda.com", fetcherFn: barodaCovidHospitals},
                 {source: "https://covidbengaluru.com", fetcherFn: bengaluruCovidHospitals},
@@ -172,7 +174,7 @@ const dataFetchers = [
                 {source: "https://covidmp.com", fetcherFn: madhyaPradeshCovidHospitals},
                 {source: "https://covidwb.com", fetcherFn: bengalCovidHospitals},
                 {source: "https://covidtelangana.com", fetcherFn: telanganaCovidHospitals},
-                // SOurce removed {source:"https://covidresource.in", fetcherFn: covidresourcesIn}
+                //Source removed {source:"https://covidresource.in", fetcherFn: covidresourcesIn}
             ]
 
 async function getAllData() {
