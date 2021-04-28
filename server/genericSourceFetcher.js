@@ -38,6 +38,39 @@ function generalPostProcessor(item) {
     
 }
 
+function covidresourcesInDataProcessor(city,cityData){
+    const renameMap = {"name": "hospital",
+                        "description": "others",
+                       "name": "address",
+                       "contact": "contactPerson",
+                       "contact": "contactNumber",
+                       "lastVerified": "verifiedAt",
+                       "district": "city"
+                        }
+    if(!cityData.length){
+        return [];
+    }
+    else{
+
+        cityData.map(resource => {
+            
+            resource.resources=[];
+            if(resource.category.indexOf("Bed")>=0)
+                resource.resources.push("beds");
+            if(resource.category.indexOf("Oxygen")>=0)
+                resource.resources.push("oxygen")
+            if(resource.category.indexOf("Plasma")>=0)
+                resource.resources.push("plasma")
+            resource.city = city;
+            // resource = _.renameKeys(resource, renameMap)
+            // TODO: rename keys to match FE
+            
+        })
+        //cityData.city= city;
+        return cityData;
+    }
+}
+
 async function nashikCovidHospitals() {
     const {data} = await axios.get("https://covidnashik.com/data/covidnashik.com/bed_data.json")
     return data.map(generalPostProcessor).map(item=>{return {...item, city: "nashik", resources: ["beds"]}})
@@ -123,6 +156,13 @@ async function telanganaCovidHospitals(){
     return data.map(generalPostProcessor).map(item=>{return {...item, resources: ["beds"]}})
 }
 
+async function covidresourcesIn(){
+    const {data} =await axios.get("https://api.covidresources.in/data.json")
+    let cityData = Object.keys(data).map((key) => covidresourcesInDataProcessor(key,data[key]));
+    cityData = [].concat.apply([], cityData)
+    return cityData;
+}
+
 
 module.exports = {
     delhiCovidHospitals,
@@ -141,5 +181,6 @@ module.exports = {
     rajkotCovidHospitals,
     suratCovidHospitals,
     bengalCovidHospitals,
-    telanganaCovidHospitals
+    telanganaCovidHospitals,
+    covidresourcesIn
 }
