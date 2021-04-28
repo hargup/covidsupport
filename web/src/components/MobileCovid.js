@@ -11,20 +11,14 @@ import Skeleton from "react-loading-skeleton";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 
+import { theme } from "../assets/theme";
+import { media } from "../assets/media";
+
 function capitalize(s) {
   if (s) {
     return s[0].toUpperCase() + s.slice(1);
   }
 }
-
-const theme = {
-  background: "#f3f4f9",
-  text: "#666",
-  gray: "#D9DADA",
-  primary: "#8D81EF",
-  greenText: "#3CAA6B",
-  greenBack: "rgba(111, 207, 151, 0.2)",
-};
 
 const boxData = [
   {
@@ -74,8 +68,27 @@ const boxData = [
   // Other resources needs to be different page
 ];
 
-const mediaDesktop = "@media (min-width: 800px)";
-const mediaMobile = "@media (max-width: 799px)";
+/* 
+  Moved theme to /assets/media
+  to make this available in all files
+  
+  theme: {
+        // theme colors
+        background: "#f3f4f9",
+        text: "#666",
+        gray: "#D9DADA",
+        primary: "#8D81EF",
+        greenText: "#3CAA6B",
+        greenBack: "rgba(111, 207, 151, 0.2)",
+      }
+
+  ~~~~~~~~~~~~~~~~~~~~~~
+
+  Moved media to /assets/media
+  to make this available in all files
+  const mediaDesktop = "@media (min-width: 800px)";
+  const mediaMobile = "@media (max-width: 799px)"; 
+*/
 
 const Heading = styled.img`
   margin: 0;
@@ -86,7 +99,7 @@ const Wrapper = styled.div`
   background: ${theme.background};
   color: ${theme.text};
 
-  ${mediaDesktop} {
+  ${media.desktop} {
     max-width: 800px;
     margin: 1rem auto;
   }
@@ -94,12 +107,12 @@ const Wrapper = styled.div`
 
 const Check = styled(Icon.Check)`
   position: absolute;
-  top: 0.5rem;
-  right: 0.5rem;
+  top: 0.25rem;
+  right: 0.25rem;
   padding: 0.5rem;
-  width: 1.5rem;
-  height: 1.5rem;
-  stroke: ${theme.gray};
+  width: 2.25rem;
+  height: 2.25rem;
+  stroke: ${theme.white};
   border-radius: 12px;
 `;
 
@@ -108,8 +121,9 @@ const Box = styled.div`
   display: block;
   width: calc((100vw - 4rem) / 3);
   margin-bottom: 1rem;
-  border: 2px solid white;
+  border: 1px solid ${theme.border};
   background: white;
+  transition: all 0.2s ease;
 
   img {
     width: calc((100vw - 4rem) / 3);
@@ -122,22 +136,22 @@ const Box = styled.div`
         border: 2px solid ${theme.primary};
 
         ${Check} {
-          stroke: white;
-          background: ${theme.primary};
+          stroke: ${theme.primary};
+          // background: ${theme.primary};
         }
       `;
     }
   }}
   &:active {
-    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.15);
   }
   border-radius: 12px;
-  ${mediaMobile} {
+  ${media.mobile} {
     &:nth-child(3n + 2) {
       margin: 0 1rem 1rem;
     }
   }
-  ${mediaDesktop} {
+  ${media.desktop} {
     width: calc((800px - 5rem) / 4);
     &:nth-child(4n + 2) {
       margin: 0 1rem 1rem;
@@ -196,6 +210,18 @@ const Toolbar = styled.div`
   justify-content: center;
   width: 100%;
   margin: 1rem 0 2rem;
+
+  .css-yk16xz-control {
+    border-radius: 8px;
+  }
+
+  .css-1rhbuit-multiValue {
+    background-color: ${theme.grayLight};
+  }
+
+  #react-select-3-input {
+    height: 36px;
+  }
 `;
 
 const ToggleMenu = styled.div`
@@ -204,8 +230,7 @@ const ToggleMenu = styled.div`
   align-items: center;
   justify-content: center;
   border-radius: 6px;
-
-  background-color: ${theme.gray};
+  background-color: ${theme.grayLight};
   svg {
     margin: 0.5rem;
   }
@@ -219,9 +244,12 @@ const Search = styled.button`
   display: flex;
   align-items: center;
   justify-content: space-around;
-  flex-basis: 300px;
+  // flex-basis: 300px;
   color: white;
   border-radius: 6px;
+  width: 100%;
+  height: 48px;
+  max-width: 500px;
 
   svg.search {
     stroke: ${theme.background};
@@ -238,38 +266,93 @@ const Verified = styled.div`
 
 const Result = styled.div`
   display: flex;
-  /* border: 1px solid ${theme.gray}; */
+  border: 1px solid ${theme.border};
   background: white;
   margin: 1.5rem 0;
-  padding: 0.5rem;
+  padding: 1rem;
   flex-direction: column;
   border-radius: 6px;
+
   .header {
-    display: flex;
     justify-content: space-between;
-    color: ${theme.primary};
+    color: ${theme.gray};
     b {
-      font-size: 1.5rem;
-      color: ${theme.primary};
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: ${theme.grayDarker};
+      line-height: 1.2;
+      display: block;
+      margin-bottom: 0.25rem;
     }
   }
+
   .details {
     margin: 1rem 0 0.5rem;
-    font-size: 1.2rem;
+    font-size: 1rem;
+
+    b {
+      font-weight: 400;
+      line-height: 1.2;
+    }
+
+    &__col {
+      margin-bottom: 0.5rem;
+
+      p {
+        display: flex;
+        align-items: center;
+
+        span {
+          display: block;
+          min-width: 120px;
+          font-size: 1rem;
+        }
+      }
+    }
+
+    &__contact {
+      &-phone {
+        display: flex;
+        margin-bottom: 0.5rem;
+
+        p:first-child {
+          min-width: 120px;
+          font-size: 1rem;
+        }
+      }
+
+      &-address {
+        p {
+          display: flex;
+
+          span {
+            display: block;
+            min-width: 120px;
+          }
+        }
+      }
+    }
   }
+
   .footer {
-    font-size: 0.9rem;
-    display: flex;
+    font-size: 0.875rem;
     align-items: center;
+
+    ${media.desktop} {
+      display: flex;
+      justify-content: space-between;
+    }
+
     p {
       margin: 0;
     }
+
     .data {
-      margin-left: 1rem;
     }
   }
 `;
 
+const OtherResourcesLink = styled.div``;
 // =============== Common Functions ==================
 
 // Usage: sortByResource(data, 'bedCount')
@@ -431,10 +514,10 @@ export default function MobileCovid() {
                 onClick={() => {
                   setScreen("input");
                 }}
-                className="m-2 border rounded"
-                style={{ background: "#D9DADA" }}
+                className="mr-2 cursor-pointer rounded bg-blue-50 h-12 w-12"
+                style={{ color: "#8D81EF" }}
               >
-                <Icon.ChevronLeft size={40} />
+                <Icon.ChevronLeft className="mt-0.5" size={40} />
               </div>
             )}
             <Select
@@ -484,8 +567,7 @@ export default function MobileCovid() {
                 <div className="header">
                   <p>
                     <b>{res.hospital || capitalize(res.resources)}</b>
-                    <br></br>
-                    {res.city}
+                    <span>{res.city}</span>
                   </p>
                   {navigator.share && (
                     <div
@@ -504,33 +586,40 @@ export default function MobileCovid() {
                 {/* <div>{JSON.stringify(res)}</div> */}
                 <div className="details">
                   {res.hospital && (
-                    <div>
+                    <div className="details__col">
                       <p>
-                        Beds: <b>{res.bedCount}</b>
+                        <span>Beds:</span> <b>{res.bedCount}</b>
                       </p>
                       <p>
-                        ICUs: <b>{res.icuCount}</b>
+                        <span>ICUs:</span> <b>{res.icuCount}</b>
                       </p>
                       {res.oxygenBeds && (
                         <p>
-                          Oxygen Beds: <b>{res.oxygenBeds}</b>
+                          <span>Oxygen Beds:</span> <b>{res.oxygenBeds}</b>
                         </p>
                       )}
                       <p>
-                        Ventilator: <b>{res.ventilatorCount}</b>
+                        <span>Ventilator:</span> <b>{res.ventilatorCount}</b>
                       </p>
                     </div>
                   )}
-                  <div>
-                    <p>Contact:</p>
-                    <b>{res.contactPerson}</b>
-                    <p>
-                      <b>{res.contactNumber}</b> <p>{res.email}</p>
-                    </p>
+                  <div className="details__contact">
+                    <div className="details__contact-phone">
+                      <p>Contact:</p>
+                      <div>
+                        <b>{res.contactPerson}</b>
+                        <p>
+                          <b>{res.contactNumber}</b> <p>{res.email}</p>
+                        </p>
+                      </div>
+                    </div>
+
                     {res.address && (
-                      <p>
-                        Address: <b>{res.address}</b>
-                      </p>
+                      <div className="details__contact-address">
+                        <p>
+                          <span>Address:</span> <b>{res.address}</b>
+                        </p>
+                      </div>
                     )}
                   </div>
                 </div>
@@ -538,21 +627,41 @@ export default function MobileCovid() {
                 <div className="footer">
                   {res.verifiedAt ? (
                     <Verified>
-                      Verified at: <br />{" "}
-                      {moment(res.verifiedAt).format("h:mm A D MMMM")}
+                      Verified at:{" "}
+                      <b className="text-green-600">
+                        {" "}
+                        {moment(res.verifiedAt).format("h:mm A D MMMM")}
+                      </b>
                     </Verified>
                   ) : (
                     <p>Not Verified</p>
                   )}
                   <p className="data">
                     Data source:{" "}
-                    <a className="text-green-600" href={res.source}>
+                    <a className="text-blue-600" href={res.source}>
                       {res.source}
                     </a>
                   </p>
                 </div>
               </Result>
             ))}
+
+          <OtherResourcesLink className="border-t">
+            <p className="text-xl max-w-xl mt-4 mb-3 ml-2">
+              Please try{" "}
+              <a
+                className="font-bold text-blue-500 underline"
+                href="/other-resources"
+              >
+                Other Resources
+              </a>{" "}
+              if the above search results in no helpful data.
+            </p>
+            <p className="text-sm max-w-xl ml-2 text-gray-500">
+              Other resources is a list of multiple covid resources that have
+              been put together by people all over the country.
+            </p>
+          </OtherResourcesLink>
         </Wrapper>
       )}
     </div>
