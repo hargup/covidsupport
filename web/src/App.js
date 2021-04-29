@@ -18,12 +18,6 @@ export default function App() {
     <Router>
       <div>
         <Navbar />
-        <div
-          className="text-xl font-semibold justify-center items-center md:hidden"
-          style={{ width: "100%", padding: "5px 5%" }}
-        >
-          Live Covid19 Resources
-        </div>
         <Switch>
           {/* <Route path="/other-resources">
             <OtherResources />
