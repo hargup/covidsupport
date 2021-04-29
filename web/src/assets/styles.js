@@ -237,3 +237,4 @@ export const Result = styled.div`
     }
   }
 `;
+export const OtherResourcesLink = styled.div``;

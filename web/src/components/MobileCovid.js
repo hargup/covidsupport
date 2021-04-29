@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import * as Icon from "react-feather";
 import SelectBoxes from "./subcomponents/home/Boxes";
 import Loader from "./subcomponents/home/Loader";
+import Resources from "./subcomponents/Resources";
 import {
   Wrapper,
   Toolbar,
@@ -157,23 +158,7 @@ export default function MobileCovid() {
             dataSortedByVerified.map((res, key) => (
               <Results key={key} res={res} />
             ))}
-
-          {/* <OtherResourcesLink className="border-t">
-            <p className="text-xl max-w-xl mt-4 mb-3 ml-2">
-              Please try{" "}
-              <a
-                className="font-bold text-blue-500 underline"
-                href="/other-resources"
-              >
-                Other Resources
-              </a>{" "}
-              if the above search results in no helpful data.
-            </p>
-            <p className="text-sm max-w-xl ml-2 text-gray-500">
-              Other resources is a list of multiple covid resources that have
-              been put together by people all over the country.
-            </p>
-          </OtherResourcesLink> */}
+          <Resources />
         </Wrapper>
       )}
     </div>
