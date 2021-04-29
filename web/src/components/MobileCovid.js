@@ -624,24 +624,26 @@ export default function MobileCovid() {
                       <p>Contact:</p>
                       <div>
                         <b>{res.contactPerson}</b>
-                        <p>
-                          {String(res.contactNumber)
-                            .replace(/\/|,/g, ",")
-                            .split(",")
-                            .map((value) => {
-                              return (
-                                <a href={"tel:" + value.trim()}>
-                                  {" "}
-                                  {value.trim()}
-                                </a>
-                              );
-                            })}
-                        </p>
-                        <p>
-                          {res.email && (
+                        {res.contactNumber && (
+                          <p>
+                            {String(res.contactNumber)
+                              .replace(/\/|,/g, ",")
+                              .split(",")
+                              .map((value) => {
+                                return (
+                                  <a href={"tel:" + value.trim()}>
+                                    {" "}
+                                    {value.trim()}
+                                  </a>
+                                );
+                              })}
+                          </p>
+                        )}
+                        {res.email && (
+                          <p>
                             <a href={"mailto:" + res.email}>{res.email}</a>
-                          )}
-                        </p>
+                          </p>
+                        )}
                       </div>
                     </div>
 
