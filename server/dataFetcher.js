@@ -19,8 +19,9 @@ const {delhiCovidHospitals,
     bengalCovidHospitals,
     telanganaCovidHospitals,
     covidresourcesIn} =  require("./genericSourceFetcher");
-// moment.tz.setDefault("Asia/Kolkata");
-// TODO: Ensure that the city names are given correctly in the data
+
+const {sheetToData} = require("./sheetToData")
+
 
 
 const hospitalSampleData = {
@@ -58,7 +59,7 @@ async function umeedLifeDataFetcher() {
 function delhiTsToISO(delhiTs){
     // NOTE: THe year is hardcoded here
     try{
-        return moment(`${delhiTs} ${moment().year()}`).utcOffset("+05:30").toISOString()
+        return moment(`${delhiTs} ${moment().year()} +05:30`).toISOString()
 
     } catch {
         return null;
@@ -85,9 +86,6 @@ function hostpitalToHospitalData(facilitiesData, bedsData, hospital){
     const normalbedData = bedsData.beds[hospital]
     const icuData = bedsData.covid_icu_beds[hospital]
     const ventilatorData = bedsData.ventilators[hospital]
-    console.log(normalbedData)
-    console.log(icuData)
-    console.log(ventilatorData)
 
     const hosptialData = {
         "hospital": hospital,
@@ -119,10 +117,16 @@ async function delhiHospitalData() {
     }
 }
 
+async function sheetToNormalizedData() {
+    var data = await sheetToData();
+    data = data.map(item => {return {...item, city: item.state, resources: ["remdesivir"]}})
+    return data; 
+}
+
 // ============== Post Processors ===========================
 
 function bedsToOtherResources(bedsData) {
-    if(bedsData.resources.includes("beds")) {
+    if(bedsData.resources?.includes("beds")) {
         const hasOxygen = bedsData.oxygenBeds && bedsData.oxygenBeds !== "0" && bedsData.oxygenBeds !== 0;
         const hasVentilators = bedsData.ventilatorCount && bedsData.ventilatorCount !== "0" && bedsData.ventilatorCount !== 0;
         const hasIcu = bedsData.ventilatorCount && bedsData.icuCount !== "0" && bedsData.icuCount !== 0;
@@ -154,6 +158,8 @@ function normalizeCityNames(city){
         return city.toLowerCase()
     }
 }
+
+
 
 // ============== Data collator =============================
 

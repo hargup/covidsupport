@@ -4,6 +4,7 @@ const cors = require('cors')
 const morgan = require('morgan')
 const apicache = require('apicache')
 const { getAllData } = require("./dataFetcher");
+const { sheetToData } = require("./sheetToData")
 
 app.use(express.json())
 app.use(cors())
@@ -15,6 +16,12 @@ app.get('/api/allData',cache('5 minutes'), async function(req, res) {
   const data = await getAllData();
   res.send(data);
   return;
+})
+
+app.get('/api/sheetData', async function(req, res) {
+  const data = await sheetToData();
+  res.send(data);
+  return
 })
 
 
