@@ -330,7 +330,7 @@ const Result = styled.div`
           }
 
           &:last-child {
-            word-break: breakword;
+            word-break: break-word;
           }
         }
       }
