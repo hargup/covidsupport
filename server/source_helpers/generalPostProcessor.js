@@ -11,7 +11,7 @@ async function genericCovidHospitals(bedsUrl,plasmaUrl,city,state) {
         axios.spread((...responses) => {
         let bedsData = typeof(responses[0].data) == "object" ? responses[0].data: [];
         let plasmaData = typeof(responses[1].data) == "object"? responses[1].data: [];
-        console.log(plasmaData);
+        // console.log(plasmaData);
         bedsData =  bedsData && bedsData.map(generalPostProcessor).map(item=>{return {...item, city, state, resources: ["beds"]}});
         plasmaData =  plasmaData && plasmaData.map(generalPostProcessor).map(item=>{return {...item, city, state, resources: ["plasma"]}});
         plasmaData = plasmaData && plasmaData.filter(item=> item.status == "available");

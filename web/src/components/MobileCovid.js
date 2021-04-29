@@ -646,7 +646,7 @@ export default function MobileCovid() {
               </Result>
             ))}
 
-          <OtherResourcesLink className="border-t">
+          {/* <OtherResourcesLink className="border-t">
             <p className="text-xl max-w-xl mt-4 mb-3 ml-2">
               Please try{" "}
               <a
@@ -661,7 +661,7 @@ export default function MobileCovid() {
               Other resources is a list of multiple covid resources that have
               been put together by people all over the country.
             </p>
-          </OtherResourcesLink>
+          </OtherResourcesLink> */}
         </Wrapper>
       )}
     </div>

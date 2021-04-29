@@ -20,7 +20,7 @@ import Navbar from "./components/navbar";
 
 import MobileCovid from "./components/MobileCovid";
 
-import OtherResources from "./components/OtherResources";
+// import OtherResources from "./components/OtherResources";
 
 // -------------------------------------------------
 
@@ -38,9 +38,9 @@ export default function App() {
           Live Covid19 Resources
         </div>
         <Switch>
-          <Route path="/other-resources">
+          {/* <Route path="/other-resources">
             <OtherResources />
-          </Route>
+          </Route> */}
           <Route path="/">
             <MobileCovid />
           </Route>
