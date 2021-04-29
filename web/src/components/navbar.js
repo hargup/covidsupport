@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import firebase from "firebase/app";
+import React, { useState } from "react";
 import "firebase/auth";
 
 export default function Navbar() {

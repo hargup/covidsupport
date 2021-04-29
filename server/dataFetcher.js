@@ -165,11 +165,11 @@ function normalizeCityNames(city){
 
 const dataFetchers = [
                 {source: "http://umeed.live", fetcherFn: umeedLifeDataFetcher},
-                {source: "https://covidnashik.com/", fetcherFn: nashikCovidHospitals},
+                {source: "https://covidnashik.com", fetcherFn: nashikCovidHospitals},
                 {source: "https://covidpune.com", fetcherFn: puneCovidHospitals},
-                {source: "https://covidgandhinagar.com/", fetcherFn: gandhinagarCovidHospitals},
-                {source: "https://covidamd.com/", fetcherFn: amdCovidHospitals},
-                {source: "https://covidbeed.com/", fetcherFn: beedCovidHospitals},
+                {source: "https://covidgandhinagar.com", fetcherFn: gandhinagarCovidHospitals},
+                {source: "https://covidamd.com", fetcherFn: amdCovidHospitals},
+                {source: "https://covidbeed.com", fetcherFn: beedCovidHospitals},
                 {source: "https://coronabeds.jantasamvad.org", fetcherFn: delhiHospitalData},
                 {source: "https://covidtnadu.com", fetcherFn: tnaduCovidHospitals},
                 //enable after duplication fixes // {source: "https://coviddelhi.com", fetcherFn: delhiCovidHospitals},

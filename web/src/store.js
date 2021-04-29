@@ -88,7 +88,6 @@ const updateUrl = (store) => (next) => (action) => {
   if (action?.type?.startsWith("selectedResources")) {
     const selectedResources = store.getState().selectedResources;
     urlObj.searchParams.set("resources", selectedResources.join(","));
-    console.log(urlObj.searchParams);
     window.history.pushState(
       { selectedResources },
       "",
