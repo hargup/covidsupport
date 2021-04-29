@@ -276,6 +276,8 @@ const Result = styled.div`
   .header {
     justify-content: space-between;
     color: ${theme.gray};
+    text-transform: capitalize;
+
     b {
       font-size: 1.15rem;
       font-weight: 600;
@@ -319,6 +321,18 @@ const Result = styled.div`
           min-width: 120px;
           font-size: 1rem;
         }
+
+        a {
+          color: ${theme.primary};
+
+          &:not(:last-child)::after {
+            content: ", ";
+          }
+
+          &:last-child {
+            word-break: break-word;
+          }
+        }
       }
 
       &-address {
@@ -352,7 +366,7 @@ const Result = styled.div`
   }
 `;
 
-const OtherResourcesLink = styled.div``;
+// const OtherResourcesLink = styled.div``;
 // =============== Common Functions ==================
 
 // Usage: sortByResource(data, 'bedCount')
@@ -608,9 +622,26 @@ export default function MobileCovid() {
                       <p>Contact:</p>
                       <div>
                         <b>{res.contactPerson}</b>
-                        <p>
-                          <b>{res.contactNumber}</b> <p>{res.email}</p>
-                        </p>
+                        {res.contactNumber && (
+                          <p>
+                            {String(res.contactNumber)
+                              .replace(/\/|,/g, ",")
+                              .split(",")
+                              .map((value) => {
+                                return (
+                                  <a href={"tel:" + value.trim()}>
+                                    {" "}
+                                    {value.trim()}
+                                  </a>
+                                );
+                              })}
+                          </p>
+                        )}
+                        {res.email && (
+                          <p>
+                            <a href={"mailto:" + res.email}>{res.email}</a>
+                          </p>
+                        )}
                       </div>
                     </div>
 
