@@ -276,6 +276,8 @@ const Result = styled.div`
   .header {
     justify-content: space-between;
     color: ${theme.gray};
+    text-transform: capitalize;
+
     b {
       font-size: 1.15rem;
       font-weight: 600;
@@ -319,6 +321,18 @@ const Result = styled.div`
           min-width: 120px;
           font-size: 1rem;
         }
+
+        a {
+          color: ${theme.primary};
+
+          &:not(:last-child)::after {
+            content: ", ";
+          }
+
+          &:last-child {
+            word-break: breakword;
+          }
+        }
       }
 
       &-address {
@@ -352,7 +366,7 @@ const Result = styled.div`
   }
 `;
 
-const OtherResourcesLink = styled.div``;
+// const OtherResourcesLink = styled.div``;
 // =============== Common Functions ==================
 
 // Usage: sortByResource(data, 'bedCount')
@@ -611,7 +625,22 @@ export default function MobileCovid() {
                       <div>
                         <b>{res.contactPerson}</b>
                         <p>
-                          <b>{res.contactNumber}</b> <p>{res.email}</p>
+                          {String(res.contactNumber)
+                            .replace(/\/|,/g, ",")
+                            .split(",")
+                            .map((value) => {
+                              return (
+                                <a href={"tel:" + value.trim()}>
+                                  {" "}
+                                  {value.trim()}
+                                </a>
+                              );
+                            })}
+                        </p>
+                        <p>
+                          {res.email && (
+                            <a href={"mailto:" + res.email}>{res.email}</a>
+                          )}
                         </p>
                       </div>
                     </div>
@@ -648,7 +677,7 @@ export default function MobileCovid() {
               </Result>
             ))}
 
-          <OtherResourcesLink className="border-t">
+          {/* <OtherResourcesLink className="border-t">
             <p className="text-xl max-w-xl mt-4 mb-3 ml-2">
               Please try{" "}
               <a
@@ -663,7 +692,7 @@ export default function MobileCovid() {
               Other resources is a list of multiple covid resources that have
               been put together by people all over the country.
             </p>
-          </OtherResourcesLink>
+          </OtherResourcesLink> */}
         </Wrapper>
       )}
     </div>
