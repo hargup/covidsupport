@@ -1489,32 +1489,32 @@ const delhiFacilitiesData = {
     },
     "GB pant hospital": {
       "type": "Delhi Govt",
-      "address": null,
-      "contact_numbers": [],
-      "location": null
+      "address": "1, Jawaharlal Nehru Marg, 64 Khamba, Raj Ghat, New Delhi, Delhi 110002",
+      "contact_numbers": ["01123234242"],
+      "location": "https://www.google.com/maps/place/Govind+Ballabh+Pant+Hospital/@28.63936,77.2328445,17z/data=!3m1!4b1!4m12!1m5!8m4!1e1!2s114589013503155515087!3m1!1e1!3m5!1s0x390cfcd80ec13561:0x8941ec4bf9184f80!8m2!3d28.6393553!4d77.2350332!16s%2Fg%2F1tdx72d3"
     },
     "ILBS": {
       "type": "Delhi Govt",
-      "address": null,
-      "contact_numbers": [],
-      "location": null
+      "address": "D1 ilbs, Vasant Kunj Marg, New Delhi, Delhi 110070",
+      "contact_numbers": ["01146300000"],
+      "location": "https://www.google.co.in/maps/place/Institute+of+Liver+and+Biliary+Sciences/@28.5068854,77.1659994,15z/data=!4m2!3m1!1s0x0:0x3652e3d9251178c7?sa=X&ved=2ahUKEwiDnKjvr6LwAhWJzTgGHfTuBLUQ_BIwEnoECCYQBQ"
     },
     "IHBAS": {
       "type": "Delhi Govt",
-      "address": null,
-      "contact_numbers": [],
-      "location": null
+      "address": "Tahirpur Road, Swami Dayanand Hospital Rd, Dilshad Garden, New Delhi, Delhi 110095",
+      "contact_numbers": ["01122114021"],
+      "location": "https://www.google.co.in/maps/place/IHBAS/@28.6826275,77.3049532,15z/data=!4m5!3m4!1s0x0:0x65fb67213e52121b!8m2!3d28.6826275!4d77.3049532"
     },
     "Delhi state cancer institute": {
       "type": "Delhi Govt",
-      "address": null,
-      "contact_numbers": [],
+      "address": "East Nathu Colony, GTB Staff Colony, Dilshad Garden, Delhi, 110095",
+      "contact_numbers": ["1122135700, 1122135200"],
       "location": null
     },
     "Poor house hospital": {
       "type": "Delhi Govt",
-      "address": null,
-      "contact_numbers": [],
+      "address": "Sewa Kutir Complex , Kingsway Camp, Beggers Home , G.T.B.Nagar, North West, Delhi - 110009",
+      "contact_numbers": ["01123965532, 01123831524"],
       "location": null
     },
     "World Brain Center Hospital": {
