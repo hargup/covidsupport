@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Skeleton from "react-loading-skeleton";
 import { Wrapper, Heading } from "../assets/styles";
 
-class Loader extends Component {
+class OtherResources extends Component {
   render() {
     return (
       <div>
@@ -33,4 +33,4 @@ class Loader extends Component {
   }
 }
 
-export default Loader;
+export default OtherResources;
