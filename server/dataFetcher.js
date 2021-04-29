@@ -126,7 +126,7 @@ async function sheetToNormalizedData() {
 // ============== Post Processors ===========================
 
 function bedsToOtherResources(bedsData) {
-    if(bedsData.resources?.includes("beds")) {
+    if(bedsData.resources.includes("beds")) {
         const hasOxygen = bedsData.oxygenBeds && bedsData.oxygenBeds !== "0" && bedsData.oxygenBeds !== 0;
         const hasVentilators = bedsData.ventilatorCount && bedsData.ventilatorCount !== "0" && bedsData.ventilatorCount !== 0;
         const hasIcu = bedsData.ventilatorCount && bedsData.icuCount !== "0" && bedsData.icuCount !== 0;
