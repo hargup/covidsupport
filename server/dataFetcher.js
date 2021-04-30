@@ -161,6 +161,7 @@ function normalizeCityNames(city){
 
 
 
+
 // ============== Data collator =============================
 
 const dataFetchers = [
