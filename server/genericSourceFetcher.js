@@ -39,13 +39,13 @@ async function tnaduCovidHospitals() {
     // inside Tamil Nadu
     const bedsUrl = "https://covidtnadu.com/data/covidtnadu.com/bed_data.json";
     const plasmaUrl = "https://covidtnadu.com/data/covidtnadu.com/plasma_data.json"
-    return await genericCovidHospitals(bedsUrl,plasmaUrl,'','Tamil Nadu');
+    return await genericCovidHospitals(bedsUrl,plasmaUrl,null,'Tamil Nadu');
 }
 
 async function AndhraCovidHospitals() {
     const bedsUrl = "https://covidaps.com/data/covidaps.com/bed_data.json";
     const plasmaUrl = "https://covidaps.com/data/covidaps.com/plasma_data.json"
-    return await genericCovidHospitals(bedsUrl,plasmaUrl,'','Andhra Pradesh');
+    return await genericCovidHospitals(bedsUrl,plasmaUrl,null,'Andhra Pradesh');
 }
 
 async function delhiCovidHospitals(){
@@ -67,13 +67,13 @@ async function bengaluruCovidHospitals(){
 async function chattisgarhCovidHospitals(){
     const bedsUrl = "https://covidcgh.com/data/covidcgh.com/bed_data.json";
     const plasmaUrl = "https://covidcgh.com/data/covidcgh.com/plasma_data.json"
-    return await genericCovidHospitals(bedsUrl,plasmaUrl,'','Chhattisgarh');
+    return await genericCovidHospitals(bedsUrl,plasmaUrl,null,'Chhattisgarh');
 }
 
 async function madhyaPradeshCovidHospitals(){
     const bedsUrl = "https://covidmp.com/data/covidmp.com/bed_data.json";
     const plasmaUrl = "https://covidmp.com/data/covidmp.com/plasma_data.json"
-    return await genericCovidHospitals(bedsUrl,plasmaUrl,'','Madhya Pradesh');
+    return await genericCovidHospitals(bedsUrl,plasmaUrl,null,'Madhya Pradesh');
 }
 
 async function nagpurCovidHospitals(){
@@ -97,13 +97,13 @@ async function suratCovidHospitals(){
 async function bengalCovidHospitals(){
     const bedsUrl = "https://covidwb.com/data/covidwb.com/bed_data.json";
     const plasmaUrl = "https://covidwb.com/data/covidwb.com/plasma_data.json"
-    return await genericCovidHospitals(bedsUrl,plasmaUrl,'','West Bengal');
+    return await genericCovidHospitals(bedsUrl,plasmaUrl,null,'West Bengal');
 }
 
 async function telanganaCovidHospitals(){
     const bedsUrl = "https://covidtelangana.com/data/covidtelangana.com/bed_data.json";
     const plasmaUrl = "https://covidtelangana.com/data/covidtelangana.com/plasma_data.json"
-    return await genericCovidHospitals(bedsUrl,plasmaUrl,'','Telangana');
+    return await genericCovidHospitals(bedsUrl,plasmaUrl,null,'Telangana');
 }
 
 async function covidresourcesIn(){

@@ -2,6 +2,13 @@ var moment = require('moment')
 const _ = require('lodash-contrib');
 const axios = require('axios')
 
+function addressToCity(address) {
+    const tokens = address.split(',').map(t=>t.trim())
+    // Return the second last thing
+    // Example if address 'Door No. 22-8-496 to 501, Ist and 2nd floor, Chatta Bazar ‘X’ Road, Opp: City Civil Courts, Purani Haveli, , Hyderabad, Hyderabad, Telangana'
+    // City is the second last token after spliting by ","
+    return tokens[tokens.length - 2]
+}
 //for all covid<city/state> sites
 async function genericCovidHospitals(bedsUrl,plasmaUrl,city,state) {
     let data = axios.get(bedsUrl);
@@ -11,9 +18,8 @@ async function genericCovidHospitals(bedsUrl,plasmaUrl,city,state) {
         axios.spread((...responses) => {
         let bedsData = typeof(responses[0].data) == "object" ? responses[0].data: [];
         let plasmaData = typeof(responses[1].data) == "object"? responses[1].data: [];
-        // console.log(plasmaData);
-        bedsData =  bedsData && bedsData.map(generalPostProcessor).map(item=>{return {...item, city, state, resources: ["beds"]}});
-        plasmaData =  plasmaData && plasmaData.map(generalPostProcessor).map(item=>{return {...item, city, state, resources: ["plasma"]}});
+        bedsData =  bedsData && bedsData.map(generalPostProcessor).map(item=>{return {...item, city: city || item.district || item.area, state, resources: ["beds"]}});
+        plasmaData =  plasmaData && plasmaData.map(generalPostProcessor).map(item=>{return {...item, city: city || addressToCity(item.address), state, resources: ["plasma"]}});
         plasmaData = plasmaData && plasmaData.filter(item=> item.status == "available");
         return [].concat(plasmaData, bedsData)
         })
