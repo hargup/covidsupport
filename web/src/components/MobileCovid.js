@@ -25,6 +25,8 @@ import {
   filterResource,
 } from "./helpers/main.helper";
 
+import { cityToState } from "./helpers/CityToState";
+
 // =============== Main Component  ==================
 
 export default function MobileCovid() {
@@ -42,7 +44,12 @@ export default function MobileCovid() {
   window.moment = moment;
 
   const getCityOptions = (city) => {
-    return { label: capitalize(city), value: city };
+    const state = cityToState[city];
+    if (state) {
+      return { label: `${capitalize(city)}, ${state}`, value: city };
+    } else {
+      return { label: capitalize(city), value: city };
+    }
   };
 
   const setSelectedResources = useCallback(
