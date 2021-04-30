@@ -58,6 +58,13 @@ class Detail extends Component {
               </p>
             </div>
           )}
+          {res.others && (
+            <div className="details__contact-address">
+              <p>
+                <span>Comments:</span> <b>{res.others}</b>
+              </p>
+            </div>
+          )}
         </div>
       </div>
     );
