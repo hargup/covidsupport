@@ -123,6 +123,64 @@ async function sheetToNormalizedData() {
     return data; 
 }
 
+// {
+// 	"0": {
+// 		"id": 5,
+// 		"name": "Jaypee Hospital",
+// 		"normal": "0",
+// 		"oxygen": "178",
+// 		"ventilator": "90",
+// 		"Vacant_ventilator": "0",
+// 		"Vacant_oxygen": "0",
+// 		"Vacant_normal": "0",
+// 		"address": "Jaypee Hospital Rd, Goberdhanpur, Sector 128, Noida, Uttar Pradesh 201304",
+// 		"phone_number": "1204122222",
+// 		"location_url": "https://www.google.com/maps/place/Jaypee+Hospital+-+Multispeciality+Hospital+in+Noida/@28.5154426,77.3692531,17z/data=!3m1!4b1!4m5!3m4!1s0x390ce66a55555555:0xecd13afcb2e7cb44!8m2!3d28.5154379!4d77.3714472",
+// 		"published_at": "2021-04-24T05:35:19.884Z",
+// 		"created_at": "2021-04-24T03:04:57.591Z",
+// 		"updated_at": "2021-04-30T07:35:04.594Z"
+// 	}
+// }
+async function noidaCovidHospitals() {
+    const sampleInput = {
+    		"id": 5,
+    		"name": "Jaypee Hospital",
+    		"normal": "0",
+    		"oxygen": "178",
+    		"ventilator": "90",
+    		"Vacant_ventilator": "0",
+    		"Vacant_oxygen": "0",
+    		"Vacant_normal": "0",
+    		"address": "Jaypee Hospital Rd, Goberdhanpur, Sector 128, Noida, Uttar Pradesh 201304",
+    		"phone_number": "1204122222",
+    		"location_url": "https://www.google.com/maps/place/Jaypee+Hospital+-+Multispeciality+Hospital+in+Noida/@28.5154426,77.3692531,17z/data=!3m1!4b1!4m5!3m4!1s0x390ce66a55555555:0xecd13afcb2e7cb44!8m2!3d28.5154379!4d77.3714472",
+    		"published_at": "2021-04-24T05:35:19.884Z",
+    		"created_at": "2021-04-24T03:04:57.591Z",
+    		"updated_at": "2021-04-30T07:35:04.594Z"
+    	}
+
+    try {
+        const {data : dataRaw} = await axios.get(`https://safe-waters-75143.herokuapp.com/hospitals`)
+        const data = dataRaw.map(item => {
+            return {...item,
+                "hospital": item.name,
+                "verifiedAt": item.updated_at,
+                "oxygenBeds": item.Vacant_oxygen,
+                "bedCount": item.Vacant_normal,
+                "ventilatorCount": item.Vacant_ventilator,
+                "address": item.address,
+                "contactNumber": item.phone_number,
+                "location": item.location_url,
+                "resources": ["beds"],
+                "city": "Noida",
+                    }
+        })
+        return data;
+    } catch {
+        return [];
+    }
+}
+
 // ============== Post Processors ===========================
 
 function bedsToOtherResources(bedsData) {
@@ -181,6 +239,7 @@ const dataFetchers = [
                 {source: "https://covidmp.com", fetcherFn: madhyaPradeshCovidHospitals},
                 {source: "https://covidwb.com", fetcherFn: bengalCovidHospitals},
                 {source: "https://covidtelangana.com", fetcherFn: telanganaCovidHospitals},
+                {source: "https://gbncovidtracker.in/", fetcherFn: noidaCovidHospitals}
                 //Source removed {source:"https://covidresource.in", fetcherFn: covidresourcesIn}
             ]
 
