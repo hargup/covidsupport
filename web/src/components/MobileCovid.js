@@ -24,6 +24,7 @@ import {
   filterCities,
   filterResource,
 } from "./helpers/main.helper";
+import { dlSearch } from "./helpers/datalayer";
 
 import { cityToState } from "./helpers/CityToState";
 
@@ -150,6 +151,7 @@ export default function MobileCovid() {
                     selectedResources.length > 0 ||
                     selectedCities.length > 0
                   ) {
+                    dlSearch(selectedResources, selectedCities);
                     setScreen("results");
                   }
                 }}

@@ -1,5 +1,5 @@
 const axios = require('axios')
-const{genericCovidHospitals, covidresourcesInDataProcessor} =require("./source_helpers/generalPostProcessor.js")
+const{genericCovidHospitals, covidresourcesInDataProcessor} =require("../source_helpers/generalPostProcessor.js")
 const _ = require('lodash-contrib');
 
 
