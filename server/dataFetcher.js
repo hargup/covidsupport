@@ -19,6 +19,7 @@ const {delhiCovidHospitals,
     bengalCovidHospitals,
     telanganaCovidHospitals,
     covidresourcesIn} =  require("./hospitalResources/genericSourceFetcher");
+const {biharBeds, biharOxygen} = require("./hospitalResources/biharSheetData")
 const {noidaCovidHospitals,umeedLifeDataFetcher,delhiHospitalData} = require("./hospitalResources/otherHospitalResources")
 const {sheetToData} = require("./sheetToData")
 
@@ -67,7 +68,7 @@ async function sheetToNormalizedData() {
 // ============== Post Processors ===========================
 
 function bedsToOtherResources(bedsData) {
-    if(bedsData.resources.includes("beds")) {
+    if(bedsData && bedsData.resources && bedsData.resources.includes("beds")) {
         const hasOxygen = bedsData.oxygenBeds && bedsData.oxygenBeds !== "0" && bedsData.oxygenBeds !== 0;
         const hasVentilators = bedsData.ventilatorCount && bedsData.ventilatorCount !== "0" && bedsData.ventilatorCount !== 0;
         const hasIcu = bedsData.ventilatorCount && bedsData.icuCount !== "0" && bedsData.icuCount !== 0;
@@ -122,7 +123,11 @@ const dataFetchers = [
                 {source: "https://covidmp.com", fetcherFn: madhyaPradeshCovidHospitals},
                 {source: "https://covidwb.com", fetcherFn: bengalCovidHospitals},
                 {source: "https://covidtelangana.com", fetcherFn: telanganaCovidHospitals},
-                {source: "https://gbncovidtracker.in/", fetcherFn: noidaCovidHospitals}
+                {source: "https://gbncovidtracker.in/", fetcherFn: noidaCovidHospitals},
+                {source: "https://docs.google.com/spreadsheets/d/1foeKIDRi_U6VTsyv1s_Hi3-5dWbQfIBrARgjeQDgwaU/edit#gid=0",
+                 fetcherFn: biharBeds},
+                //  {source: "https://docs.google.com/spreadsheets/d/1foeKIDRi_U6VTsyv1s_Hi3-5dWbQfIBrARgjeQDgwaU/edit#gid=0",
+                //  fetcherFn: biharOxygen}
                 //Source removed {source:"https://covidresource.in", fetcherFn: covidresourcesIn}
             ]
 

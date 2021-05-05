@@ -13,6 +13,7 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "google-search-results-nodejs": "^2.0.1",
+    "immer": "^9.0.2",
     "lodash": "^4.17.21",
     "lodash-contrib": "^241.2.1",
     "moment": "^2.29.1",
