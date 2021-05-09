@@ -6,7 +6,7 @@ At [covidsupport.neera.ai](covidsupport.neera.ai) we provide a single place to s
 - Convert into one standard format
 - This data is searched and filtered on the frontend.
 
-The data collection part is available here. You can use the full app at [covidsupport.neera.ai](covidsupport.neera.ai)
+The data collection part is available here. You can use the full app at [covidsupport.neera.ai](https://covidsupport.neera.ai)
 
 # How to run the project locally
 ## Frontend
