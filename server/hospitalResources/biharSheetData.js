@@ -39,6 +39,11 @@ function normalizeBiharData(item)
         }
         draftItem.resources = resources;
         draftItem.verifiedAt = itemToVerifiedAt(draftItem);
+        draftItem.contactNumber = []
+        if(draftItem["Secondary Number"]) {draftItem.contactNumber.push(draftItem["Secondary Number"])}
+        if(draftItem["Primary Number"]) {draftItem.contactNumber.push(draftItem["Primary Number"])}
+
+
     })
     return normalizedData;
 }
@@ -48,8 +53,7 @@ async function biharBeds() {
     data = data.filter(item => {return item.District})
     data = data.map(item => {return _.renameKeys(item, {"District": "city",
                                                  "Hospital Name": "hospital",
-                                                 "Address": "address",
-                                                 "Phone": "contactNumber"})})
+                                                 "Address": "address"})})
                     .map(item => {return normalizeBiharData(item)})
                
     // const x = normalizeBiharData(data[3])
