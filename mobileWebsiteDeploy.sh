@@ -1,4 +1,4 @@
-REMOTE_USER="mobile@covidsupport.neera.ai"
+REMOTE_USER="root@covidsupport.neera.ai"
 yarn --cwd="web" build
 rsync -r --exclude="node_modules" ./ $REMOTE_USER:~/covid_app
 # The server is running as a pm2 process on the server and you restart it
