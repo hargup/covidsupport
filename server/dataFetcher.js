@@ -19,10 +19,10 @@ const {delhiCovidHospitals,
     bengalCovidHospitals,
     telanganaCovidHospitals,
     covidresourcesIn} =  require("./hospitalResources/genericSourceFetcher");
+const { odishaBeds } = require("./hospitalResources/odishaSheetData")
 const {biharBeds, biharOxygen} = require("./hospitalResources/biharSheetData")
 const {noidaCovidHospitals,umeedLifeDataFetcher,delhiHospitalData} = require("./hospitalResources/otherHospitalResources")
 const {sheetToData} = require("./sheetToData")
-
 
 
 const hospitalSampleData = {
@@ -126,6 +126,9 @@ const dataFetchers = [
                 {source: "https://gbncovidtracker.in/", fetcherFn: noidaCovidHospitals},
                 {source: "https://docs.google.com/spreadsheets/d/1foeKIDRi_U6VTsyv1s_Hi3-5dWbQfIBrARgjeQDgwaU/edit#gid=0",
                  fetcherFn: biharBeds},
+                {source: "https://docs.google.com/spreadsheets/d/1lHEdSqvduJKOk_mtkqNHrcjGr5-9vIkA7v6DXc3vUVA/edit#gid=0",
+                 fetcherFn: odishaBeds},
+
                 //  {source: "https://docs.google.com/spreadsheets/d/1foeKIDRi_U6VTsyv1s_Hi3-5dWbQfIBrARgjeQDgwaU/edit#gid=0",
                 //  fetcherFn: biharOxygen}
                 //Source removed {source:"https://covidresource.in", fetcherFn: covidresourcesIn}
