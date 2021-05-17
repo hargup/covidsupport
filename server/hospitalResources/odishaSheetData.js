@@ -28,7 +28,20 @@ async function odishaBeds() {
     return data
 }
 
+async function odishaOxygen() {
+    var data = await sheetToData('1lHEdSqvduJKOk_mtkqNHrcjGr5-9vIkA7v6DXc3vUVA', 'Oxygen Cylinders',);
+    data = data.map(item => {return _.renameKeys(item, {"District": "city",
+                                                 "Hospital Name": "hospital",
+                                                 "Address": "address",
+                                                 "Primary Number": "contactNumber",
+                                                 "Type": "others"})})
+                .map(item => {return {...item,
+                    resources: "oxygen",
+                    verifiedAt: itemToVerifiedAt(item)}})
+    return data
+}
 
 module.exports = {
-    odishaBeds
+    odishaBeds,
+    odishaOxygen
 }
