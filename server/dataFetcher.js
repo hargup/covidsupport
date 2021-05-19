@@ -20,7 +20,7 @@ const { delhiCovidHospitals,
     telanganaCovidHospitals,
     covidresourcesIn } = require("./hospitalResources/genericSourceFetcher");
 const { upBeds, upOxygen } = require("./hospitalResources/upSheetData")
-const { odishaBeds } = require("./hospitalResources/odishaSheetData")
+const { odishaBeds, odishaOxygen } = require("./hospitalResources/odishaSheetData")
 const { biharBeds, biharOxygen } = require("./hospitalResources/biharSheetData")
 const { noidaCovidHospitals, umeedLifeDataFetcher, delhiHospitalData } = require("./hospitalResources/otherHospitalResources")
 const { sheetToData } = require("./sheetToData")
@@ -134,6 +134,10 @@ const dataFetchers = [
     {
         source: "https://docs.google.com/spreadsheets/d/1lHEdSqvduJKOk_mtkqNHrcjGr5-9vIkA7v6DXc3vUVA/edit#gid=0",
         fetcherFn: odishaBeds
+    },
+    {
+        source: "https://docs.google.com/spreadsheets/d/1lHEdSqvduJKOk_mtkqNHrcjGr5-9vIkA7v6DXc3vUVA/edit#gid=588659199",
+        fetcherFn: odishaOxygen
     },
     {
         source: "https://docs.google.com/spreadsheets/d/1l3EYw6r0MlekbJAng1jxmSeDerkFdyF5EIjl1rjgyv4/edit#gid=0",
