@@ -1,9 +1,9 @@
 const axios = require('axios')
 const { forEach } = require('lodash')
 var moment = require('moment')
-const _ = require('lodash-contrib'); 
+const _ = require('lodash-contrib');
 const { delhiFacilitiesData } = require("./source_helpers/delhiFacilitiesData");
-const {delhiCovidHospitals,
+const { delhiCovidHospitals,
     AndhraCovidHospitals,
     tnaduCovidHospitals,
     beedCovidHospitals,
@@ -18,11 +18,12 @@ const {delhiCovidHospitals,
     nagpurCovidHospitals,
     bengalCovidHospitals,
     telanganaCovidHospitals,
-    covidresourcesIn} =  require("./hospitalResources/genericSourceFetcher");
-const { odishaBeds } = require("./hospitalResources/odishaSheetData")
-const {biharBeds, biharOxygen} = require("./hospitalResources/biharSheetData")
-const {noidaCovidHospitals,umeedLifeDataFetcher,delhiHospitalData} = require("./hospitalResources/otherHospitalResources")
-const {sheetToData} = require("./sheetToData")
+    covidresourcesIn } = require("./hospitalResources/genericSourceFetcher");
+const { upBeds, upOxygen } = require("./hospitalResources/upSheetData")
+const { odishaBeds, odishaOxygen } = require("./hospitalResources/odishaSheetData")
+const { biharBeds, biharOxygen } = require("./hospitalResources/biharSheetData")
+const { noidaCovidHospitals, umeedLifeDataFetcher, delhiHospitalData } = require("./hospitalResources/otherHospitalResources")
+const { sheetToData } = require("./sheetToData")
 
 
 const hospitalSampleData = {
@@ -42,8 +43,8 @@ const hospitalSampleData = {
 
 async function sheetToNormalizedData() {
     var data = await sheetToData();
-    data = data.map(item => {return {...item, city: item.state, resources: ["remdesivir"]}})
-    return data; 
+    data = data.map(item => { return { ...item, city: item.state, resources: ["remdesivir"] } })
+    return data;
 }
 // {
 // 	"0": {
@@ -68,7 +69,7 @@ async function sheetToNormalizedData() {
 // ============== Post Processors ===========================
 
 function bedsToOtherResources(bedsData) {
-    if(bedsData && bedsData.resources && bedsData.resources.includes("beds")) {
+    if (bedsData && bedsData.resources && bedsData.resources.includes("beds")) {
         const hasOxygen = bedsData.oxygenBeds && bedsData.oxygenBeds !== "0" && bedsData.oxygenBeds !== 0;
         const hasVentilators = bedsData.ventilatorCount && bedsData.ventilatorCount !== "0" && bedsData.ventilatorCount !== 0;
         const hasIcu = bedsData.ventilatorCount && bedsData.icuCount !== "0" && bedsData.icuCount !== 0;
@@ -82,19 +83,19 @@ function bedsToOtherResources(bedsData) {
         if (hasIcu) {
             resources.push("icu")
         }
-        return {...bedsData, resources}
+        return { ...bedsData, resources }
     } else {
         return bedsData
     }
 
 }
 
-const delhiAlternatives = ["dehi", "new delhi", "delhi", "delhi ncr", "delhi ","delhi manesar", "old delhi", " delhi ncr ", "chattarpur delhi", "chattarpur", "120 km from delhi, behror"]
+const delhiAlternatives = ["dehi", "new delhi", "delhi", "delhi ncr", "delhi ", "delhi manesar", "old delhi", " delhi ncr ", "chattarpur delhi", "chattarpur", "120 km from delhi, behror"]
 
-function normalizeCityNames(city){
-    if(!city)
+function normalizeCityNames(city) {
+    if (!city)
         return "";
-    if(delhiAlternatives.includes(city.toLowerCase())){
+    if (delhiAlternatives.includes(city.toLowerCase())) {
         return "delhi"
     } else {
         return city.toLowerCase()
@@ -107,39 +108,56 @@ function normalizeCityNames(city){
 // ============== Data collator =============================
 
 const dataFetchers = [
-                {source: "http://umeed.live", fetcherFn: umeedLifeDataFetcher},
-                {source: "https://covidnashik.com", fetcherFn: nashikCovidHospitals},
-                {source: "https://covidpune.com", fetcherFn: puneCovidHospitals},
-                {source: "https://covidgandhinagar.com", fetcherFn: gandhinagarCovidHospitals},
-                {source: "https://covidamd.com", fetcherFn: amdCovidHospitals},
-                {source: "https://covidbeed.com", fetcherFn: beedCovidHospitals},
-                {source: "https://coronabeds.jantasamvad.org", fetcherFn: delhiHospitalData},
-                {source: "https://covidtnadu.com", fetcherFn: tnaduCovidHospitals},
-                //enable after duplication fixes // {source: "https://coviddelhi.com", fetcherFn: delhiCovidHospitals},
-                {source: "https://covidaps.com", fetcherFn: AndhraCovidHospitals},
-                {source: "https://covidbaroda.com", fetcherFn: barodaCovidHospitals},
-                {source: "https://covidbengaluru.com", fetcherFn: bengaluruCovidHospitals},
-                {source: "https://covidcgh.com", fetcherFn: chattisgarhCovidHospitals},
-                {source: "https://covidmp.com", fetcherFn: madhyaPradeshCovidHospitals},
-                {source: "https://covidwb.com", fetcherFn: bengalCovidHospitals},
-                {source: "https://covidtelangana.com", fetcherFn: telanganaCovidHospitals},
-                {source: "https://gbncovidtracker.in/", fetcherFn: noidaCovidHospitals},
-                {source: "https://docs.google.com/spreadsheets/d/1foeKIDRi_U6VTsyv1s_Hi3-5dWbQfIBrARgjeQDgwaU/edit#gid=0",
-                 fetcherFn: biharBeds},
-                {source: "https://docs.google.com/spreadsheets/d/1lHEdSqvduJKOk_mtkqNHrcjGr5-9vIkA7v6DXc3vUVA/edit#gid=0",
-                 fetcherFn: odishaBeds},
+    { source: "http://umeed.live", fetcherFn: umeedLifeDataFetcher },
+    { source: "https://covidnashik.com", fetcherFn: nashikCovidHospitals },
+    { source: "https://covidpune.com", fetcherFn: puneCovidHospitals },
+    { source: "https://covidgandhinagar.com", fetcherFn: gandhinagarCovidHospitals },
+    { source: "https://covidamd.com", fetcherFn: amdCovidHospitals },
+    { source: "https://covidbeed.com", fetcherFn: beedCovidHospitals },
+    { source: "https://coronabeds.jantasamvad.org", fetcherFn: delhiHospitalData },
+    { source: "https://covidtnadu.com", fetcherFn: tnaduCovidHospitals },
+    //enable after duplication fixes // {source: "https://coviddelhi.com", fetcherFn: delhiCovidHospitals},
+    { source: "https://covidaps.com", fetcherFn: AndhraCovidHospitals },
+    { source: "https://covidbaroda.com", fetcherFn: barodaCovidHospitals },
+    { source: "https://covidbengaluru.com", fetcherFn: bengaluruCovidHospitals },
+    { source: "https://covidcgh.com", fetcherFn: chattisgarhCovidHospitals },
+    { source: "https://covidmp.com", fetcherFn: madhyaPradeshCovidHospitals },
+    { source: "https://covidwb.com", fetcherFn: bengalCovidHospitals },
+    { source: "https://covidtelangana.com", fetcherFn: telanganaCovidHospitals },
+    { source: "https://gbncovidtracker.in/", fetcherFn: noidaCovidHospitals },
+    {
+        source: "https://docs.google.com/spreadsheets/d/1foeKIDRi_U6VTsyv1s_Hi3-5dWbQfIBrARgjeQDgwaU/edit#gid=0",
+        fetcherFn: biharBeds
+    },
+    //  {source: "https://docs.google.com/spreadsheets/d/1foeKIDRi_U6VTsyv1s_Hi3-5dWbQfIBrARgjeQDgwaU/edit#gid=0",
+    //  fetcherFn: biharOxygen}
+    {
+        source: "https://docs.google.com/spreadsheets/d/1lHEdSqvduJKOk_mtkqNHrcjGr5-9vIkA7v6DXc3vUVA/edit#gid=0",
+        fetcherFn: odishaBeds
+    },
+    {
+        source: "https://docs.google.com/spreadsheets/d/1lHEdSqvduJKOk_mtkqNHrcjGr5-9vIkA7v6DXc3vUVA/edit#gid=588659199",
+        fetcherFn: odishaOxygen
+    },
+    {
+        source: "https://docs.google.com/spreadsheets/d/1l3EYw6r0MlekbJAng1jxmSeDerkFdyF5EIjl1rjgyv4/edit#gid=0",
+        fetcherFn: upBeds
+    },
+    {
+        source: "https://docs.google.com/spreadsheets/d/1l3EYw6r0MlekbJAng1jxmSeDerkFdyF5EIjl1rjgyv4/edit#gid=1294747892",
+        fetcherFn: upOxygen
+    },
 
-                //  {source: "https://docs.google.com/spreadsheets/d/1foeKIDRi_U6VTsyv1s_Hi3-5dWbQfIBrARgjeQDgwaU/edit#gid=0",
-                //  fetcherFn: biharOxygen}
-                //Source removed {source:"https://covidresource.in", fetcherFn: covidresourcesIn}
-            ]
+
+    //Source removed {source:"https://covidresource.in", fetcherFn: covidresourcesIn}
+]
 
 async function getAllData() {
     var data = [];
-    for(var i=0; i < dataFetchers.length; i++) {
-        const {source, fetcherFn} = dataFetchers[i];
+    for (var i = 0; i < dataFetchers.length; i++) {
+        const { source, fetcherFn } = dataFetchers[i];
         const newData = await fetcherFn()
-        data = data.concat(newData.map(item => {return {...item, source, city: normalizeCityNames(item.city)}}))
+        data = data.concat(newData.map(item => { return { ...item, source, city: normalizeCityNames(item.city) } }))
         data = data.map(item => bedsToOtherResources(item))
     }
     return data;
