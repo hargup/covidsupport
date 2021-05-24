@@ -181,7 +181,7 @@ export const Result = styled.div`
 
         span {
           display: block;
-          min-width: 120px;
+          min-width: 220px;
           font-size: 1rem;
         }
       }
