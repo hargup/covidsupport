@@ -8,16 +8,36 @@ class Detail extends Component {
         {res.hospital && (
           <div className="details__col">
             <p>
-              <span>Beds:</span> <b>{res.bedCount}</b>
+              <span>Total Beds:</span>{" "}
+              <b>{res.total_beds_allocated_to_covid}</b>
             </p>
+            {res.total_beds_with_oxygen !== 0 && (
+              <p>
+                <span>Beds With Oxygen:</span>{" "}
+                <b>{res.total_beds_with_oxygen}</b>
+              </p>
+            )}
+            {res.total_beds_without_oxygen !== 0 && (
+              <p>
+                <span>Beds Without Oxygen:</span>{" "}
+                <b>{res.total_beds_without_oxygen}</b>
+              </p>
+            )}
+            {res.total_icu_beds_with_ventilator !== 0 && (
+              <p>
+                <span>ICU Beds With Ventilator:</span>{" "}
+                <b>{res.total_icu_beds_with_ventilator}</b>
+              </p>
+            )}
+            {res.total_icu_beds_without_ventilator !== 0 && (
+              <p>
+                <span>ICU Beds Without Ventilator:</span>{" "}
+                <b>{res.total_icu_beds_without_ventilator}</b>
+              </p>
+            )}
             <p>
               <span>ICUs:</span> <b>{res.icuCount}</b>
             </p>
-            {res.oxygenBeds && (
-              <p>
-                <span>Oxygen Beds:</span> <b>{res.oxygenBeds}</b>
-              </p>
-            )}
             <p>
               <span>Ventilator:</span> <b>{res.ventilatorCount}</b>
             </p>
