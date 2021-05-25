@@ -78,7 +78,7 @@ export default function Navbar() {
           <div className="hidden flex-1 sm:flex items-center justify-center sm:items-stretch sm:justify-center">
             <div className="flex-shrink-0 flex items-center">
               <a
-                href="https://covidsupport.neera.ai/"
+                href="https://neera.ai/"
                 className="text-gray-600 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-lg font-medium"
               >
                 Neera
