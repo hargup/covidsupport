@@ -62,3 +62,10 @@ export const filterResource = (data, resources) => {
     return data;
   }
 };
+
+export const addToCurrentTime = (hours, minutes) => {
+  let dt = new Date();
+  dt.setHours(dt.getHours() + hours);
+  dt.setMinutes(dt.getMinutes() + minutes);
+  return dt;
+}

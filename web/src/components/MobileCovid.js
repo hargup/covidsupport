@@ -23,6 +23,7 @@ import {
   sortByVerifiedAt,
   filterCities,
   filterResource,
+  addToCurrentTime,
 } from "./helpers/main.helper";
 import { dlSearch } from "./helpers/datalayer";
 
@@ -40,6 +41,7 @@ export default function MobileCovid() {
   const [loadStatus, setLoadStatus] = useState("initial");
   const [displayData, setDisplayData] = useState([]);
   const [allCities, setAllCities] = useState([]);
+  const [showLastTwoHoursData, setShowLastTwoHoursData] = useState(false);
 
   window.data = data;
   window.moment = moment;
@@ -102,6 +104,10 @@ export default function MobileCovid() {
     .slice()
     .sort((a, b) => (b.verifiedAt || "").localeCompare(a.verifiedAt || ""));
 
+   const dataVerifiedLastTwoHours = displayData.slice().filter(data=>{
+    return ((data.verifiedAt||addToCurrentTime(-3,0).toISOString()) >= addToCurrentTime(-2,0).toISOString())
+  }).sort((a, b) => (b.verifiedAt || "").localeCompare(a.verifiedAt || ""));
+
   return (
     <div>
       {data.length === 0 ? (
@@ -157,14 +163,28 @@ export default function MobileCovid() {
                 }}
               >
                 <div style={{ width: "24px" }} />
-                <div>See Resources ({displayData.length})</div>
+                <div>See Resources ({showLastTwoHoursData ? dataVerifiedLastTwoHours.length : displayData.length})</div>
                 <Icon.ChevronsRight className="search" />
               </Search>
+
+              <div style={{ width: "24px" }} />
+              <input
+                type="checkbox"
+                id="twohours"
+                name="twohours"
+                onClick={()=>{ setShowLastTwoHoursData(prev=>!prev);}}
+                defaultChecked={showLastTwoHoursData}/>
+                <div style={{ width: "4px" }} />Verified in Last 2 Hours
             </Toolbar>
           )}
-          {dataSortedByVerified &&
+          {!showLastTwoHoursData && dataSortedByVerified &&
             screen !== "input" &&
             dataSortedByVerified.map((res, key) => (
+              <Results key={key} res={res} />
+            ))}
+            {showLastTwoHoursData &&
+            screen !== "input" &&
+            dataVerifiedLastTwoHours.map((res, key) => (
               <Results key={key} res={res} />
             ))}
           <Resources />
