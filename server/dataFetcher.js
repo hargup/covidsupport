@@ -155,10 +155,15 @@ const dataFetchers = [
 async function getAllData() {
     var data = [];
     for (var i = 0; i < dataFetchers.length; i++) {
-        const { source, fetcherFn } = dataFetchers[i];
-        const newData = await fetcherFn()
-        data = data.concat(newData.map(item => { return { ...item, source, city: normalizeCityNames(item.city) } }))
-        data = data.map(item => bedsToOtherResources(item))
+        try{
+            const { source, fetcherFn } = dataFetchers[i];
+            const newData = await fetcherFn()
+            data = data.concat(newData.map(item => { return { ...item, source, city: normalizeCityNames(item.city) } }))
+            data = data.map(item => bedsToOtherResources(item))
+        } catch {
+            console.log(`Something went wrong with ${dataFetchers[i].source}`)
+        }
+
     }
     return data;
 }
