@@ -4,7 +4,7 @@ const immer = require("immer");
 const {sheetToData} = require("../sheetToData")
 
 function itemToVerifiedAt(item) {
-    const dateStr = `${item["Date of verification"]} ${item["Time of verification"]} ${moment().year()} +05:30`;
+    const dateStr = `${item["Date"]} ${item["Time"]} ${moment().year()} +05:30`;
     console.log(dateStr)
     return moment(
         dateStr
