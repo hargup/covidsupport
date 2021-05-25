@@ -37,7 +37,7 @@ async function upBeds() {
 }
 
 async function upOxygen() {
-    var data = await sheetToData('1l3EYw6r0MlekbJAng1jxmSeDerkFdyF5EIjl1rjgyv4', 'Oxygen Cylinders',);
+    var data = await sheetToData('1l3EYw6r0MlekbJAng1jxmSeDerkFdyF5EIjl1rjgyv4', 'Oxygen',);
     data = data.map(item => {
         return _.renameKeys(item, {
             "District": "city",
