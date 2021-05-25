@@ -21,7 +21,7 @@ async function biharBeds() {
                                                  "No of ventilators ": "ventilatorCount",
                                                  "Hospital Name": "hospital",
                                                  "Address": "address",
-                                                 "Phone": "contactNumber"})})
+                                                 "Primary \nNumber": "contactNumber"})})
                 .map(item => {return {...item, resources: ["beds"],
                    verifiedAt: itemToVerifiedAt(item)}})
                
@@ -33,7 +33,7 @@ async function biharOxygen() {
     data = data.map(item => {return _.renameKeys(item, {"District": "city",
                                                  "Hospital Name": "hospital",
                                                  "Address": "address",
-                                                 "Primary Number": "contactNumber",
+                                                 "Primary \nNumber": "contactNumber",
                                                  "Type": "others"})})
                 .map(item => {return {...item,
                     resources: "oxygen",
