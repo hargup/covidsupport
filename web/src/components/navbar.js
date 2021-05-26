@@ -85,8 +85,13 @@ export default function Navbar() {
               </a>
             </div>
             <div>
-              <div className="flex-shrink-0 flex text-gray-600 items-center px-3 py-2 rounded-md text-lg font-medium">
-                Live Covid19 Resources
+              <div className="flex-shrink-0 flex items-center">
+                <a
+                  href="https://covidsupport.neera.ai/"
+                  className="text-gray-600 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-lg font-medium"
+                >
+                  Live Covid19 Resources
+                </a>
               </div>
             </div>
 
